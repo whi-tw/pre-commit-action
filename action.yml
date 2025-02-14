@@ -16,5 +16,10 @@ runs:
     with:
       path: ~/.cache/pre-commit
       key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
+      restore-keys: |
+        pre-commit-3|${{ env.pythonLocation }}|
+        pre-commit-3|
   - run: pre-commit run --show-diff-on-failure --color=always ${{ inputs.extra_args }}
+    shell: bash
+  - run: pre-commit gc
     shell: bash
